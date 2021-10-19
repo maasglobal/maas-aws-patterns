@@ -1,3 +1,7 @@
+# MaaS Global AWS Design Patterns
+
+Table of Contents
+
 - [Introduction](#introduction)
 - [API](#api)
   * [API with a custom authorizer](#api-with-a-custom-authorizer)
@@ -10,7 +14,7 @@
   * [S3 bucket event trigger with a single subscription](#s3-bucket-event-trigger-with-a-single-subscription)
   * [S3 File Upload with API Gateway](#s3-file-upload-with-api-gateway)
 - [Queues](#queues)
-  * [Dead Letter Queue (DLQ)](#dead-letter-queue--dlq-)
+  * [Dead Letter Queue (DLQ)](#dead-letter-queue-dlq)
 
 # Introduction
 
