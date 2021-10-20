@@ -13,12 +13,13 @@ Table of Contents
   * [S3 bucket event trigger with multiple subscriptions](#s3-bucket-event-trigger-with-multiple-subscriptions)
   * [S3 bucket event trigger with a single subscription](#s3-bucket-event-trigger-with-a-single-subscription)
   * [S3 File Upload with API Gateway](#s3-file-upload-with-api-gateway)
-- [Queues](#queues)
+- [Queues and Pipelines](#queues-and-pipelines)
   * [Dead Letter Queue (DLQ)](#dead-letter-queue-dlq)
+  * [High-volume event pipeline)](#high-volume-event-pipeline)
 
 # Introduction
 
-This is a collection of backend infrastructure and architecture design patterns that are considered best practices when we do development in MaaS Global.
+This is a collection of backend infrastructure and architecture design patterns that are considered best practices when we do development in MaaS Global. These patterns can be combined to build larger architectures.
 
 # API
 
@@ -72,10 +73,16 @@ When uploading files that are larger than API Gateway can handle, the following 
 
 ![S3 Upload](https://github.com/laardee/maas-aws-patterns/blob/main/diagrams/s3-upload.drawio.svg)
 
-# Queues
+# Queues and Pipelines
 
 ## Dead Letter Queue (DLQ)
 
 Asynchronously triggered Lambdas retries the execution automatically on failure a few times. To catch failed execution a dead letter queue is an option that can be used to notify failures, retry executions later, and keep the history of failed executions.
 
 ![Custom authorizer](https://github.com/laardee/maas-aws-patterns/blob/main/diagrams/queue-lambda-dlq.drawio.svg)
+
+## High-volume event pipeline
+
+Fan-in type of approach should be used with high-volume event pipelines.
+
+![Kinesis Firehose pipeline](https://github.com/laardee/maas-aws-patterns/blob/main/diagrams/event-pipeline.drawio.svg
