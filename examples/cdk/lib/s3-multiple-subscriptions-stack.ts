@@ -21,7 +21,7 @@ export class S3MultipleSubscriptionsStack extends Stack {
     // an S3 source bucket
     const bucket = new aws_s3.Bucket(this, "Bucket", {});
 
-    // an SNS topic for S3 event subsciption
+    // an SNS topic for S3 event subscription
     const topic = new aws_sns.Topic(this, "Topic", {
       topicName: "s3-multiple-subscriptions",
       displayName: "s3-multiple-subscriptions",
