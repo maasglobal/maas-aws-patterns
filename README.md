@@ -83,6 +83,12 @@ Asynchronously triggered Lambdas retries the execution automatically on failure 
 
 ## High-volume event pipeline
 
-Fan-in type of approach should be used with high-volume event pipelines.
+The fan-in approach should be used with high-volume event pipelines. The event emitter can be, e.g. Lambda functions or CloudWatch logs, which needs to be stored and processed later.
 
 ![Kinesis Firehose pipeline](https://github.com/laardee/maas-aws-patterns/blob/main/diagrams/event-pipeline.drawio.svg)
+
+## Cross-account Amazon EventBridge
+
+The fan-in approach can also be used with a cross-account Amazon EventBridge pattern. For example, CloudWatch alarms from multiple AWS accounts can be pushed to a separate account that handles the alarms centralized.
+
+![Cross-account EventBridge](https://github.com/laardee/maas-aws-patterns/blob/main/diagrams/cross-account-event-bridge.drawio.svg)
