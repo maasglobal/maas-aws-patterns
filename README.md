@@ -85,4 +85,4 @@ Asynchronously triggered Lambdas retries the execution automatically on failure 
 
 Fan-in type of approach should be used with high-volume event pipelines.
 
-![Kinesis Firehose pipeline](https://github.com/laardee/maas-aws-patterns/blob/main/diagrams/event-pipeline.drawio.svg
+![Kinesis Firehose pipeline](https://github.com/laardee/maas-aws-patterns/blob/main/diagrams/event-pipeline.drawio.svg)
