@@ -61,6 +61,8 @@ To subscribe to multiple sources when the object is created, modified, or delete
 
 ![Custom authorizer](https://github.com/laardee/maas-aws-patterns/blob/main/diagrams/s3-multiple-subscriptions.drawio.svg)
 
+Example: [examples/cdk/lib/s3-multiple-subscriptions-stack.ts](examples/cdk/lib/s3-multiple-subscriptions-stack.ts)
+
 ## S3 bucket event trigger with a single subscription
 
 If it’s known that there is no possibility that multiple processors would subscribe to S3 events, an SQS or a Lambda trigger can be used in the subscription.
