@@ -1,4 +1,4 @@
-import { APIGatewayProxyEventV2, SNSEvent, SQSEvent } from "aws-lambda";
+import { APIGatewayProxyEventV2, SNSEvent, SQSEvent } from 'aws-lambda';
 
 export const handler = (
   event: SQSEvent | SNSEvent | APIGatewayProxyEventV2
