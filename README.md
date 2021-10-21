@@ -30,6 +30,8 @@ A custom authorizer Lambda is a function that validates a header from the reques
 
 ![Custom authorizer](https://github.com/laardee/maas-aws-patterns/blob/main/diagrams/api-custom-authorizer.drawio.svg)
 
+Serverless Framework example: [examples/serverless/api-examples/serverless.yml](examples/serverless/api-examples/serverless.yml)
+
 ## API with a database connection using PostgreSQL protocol
 
 When connecting to a database with PostgreSQL protocol, the Lambda function needs to be in the same VPC. The VPC should be divided into an application tier and a data tier. The application tier subnets should be at the least in two availability zones when running the production payload.
