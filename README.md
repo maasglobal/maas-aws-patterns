@@ -12,6 +12,7 @@ Table of Contents
 - [S3](#s3)
   * [S3 bucket event trigger with multiple subscriptions](#s3-bucket-event-trigger-with-multiple-subscriptions)
   * [S3 bucket event trigger with a single subscription](#s3-bucket-event-trigger-with-a-single-subscription)
+  * [S3 object index in a DynamoDB table](#s3-object-index-in-a-dynamodb-table)
   * [S3 File Upload with API Gateway](#s3-file-upload-with-api-gateway)
 - [Queues and Pipelines](#queues-and-pipelines)
   * [Dead Letter Queue (DLQ)](#dead-letter-queue-dlq)
