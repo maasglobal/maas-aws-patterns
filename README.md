@@ -17,6 +17,10 @@ Table of Contents
 - [Queues and Pipelines](#queues-and-pipelines)
   * [Dead Letter Queue (DLQ)](#dead-letter-queue-dlq)
   * [High-volume event pipeline)](#high-volume-event-pipeline)
+- [Deployment](#deployment)
+  * [Usage of Systems Manager Parameter Store with deployment](#usage-of-systems-manager-parameter-store-with-deployment)
+
+
 
 # Introduction
 
@@ -105,3 +109,13 @@ The fan-in approach should be used with high-volume event pipelines. The event e
 The fan-in approach can also be used with a cross-account Amazon EventBridge pattern. For example, CloudWatch alarms from multiple AWS accounts can be pushed to a separate account that handles the alarms centralized.
 
 ![Cross-account EventBridge](https://github.com/laardee/maas-aws-patterns/blob/main/diagrams/cross-account-event-bridge.drawio.svg)
+
+# Deployment
+
+## Usage of Systems Manager Parameter Store with deployment
+
+Sharing parameters between service deployments can be done multiple ways, for example, exporting output from the CloudFormation template and importing that to the next stack. In this approach, changes that require replacement in the exporting stack will cause issues - exported params cannot be changed if other stack imports those. Removing the importing stack will cause long downtime.
+
+One option is to write parameters to the SSM parameter store and use those in the deployment that requires them. Of course, when the parameters change in the exporting stack, there will be downtime, but it will be less than with the removal and redeploy approach.
+
+![Cross-account EventBridge](https://github.com/laardee/maas-aws-patterns/blob/main/diagrams/ssm-infra-parameters.drawio.svg)
