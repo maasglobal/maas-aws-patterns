@@ -1,6 +1,6 @@
 service: api-examples
 
-frameworkVersion: '2'
+frameworkVersion: "2"
 
 provider:
   name: aws
@@ -31,9 +31,24 @@ functions:
     handler: src/authorizer/index.handler
   echo:
     handler: src/echo/index.handler
+    # ssm infra parameters example, no actual reason to run inside vpc
+    vpc:
+      securityGroupIds:
+        - !Ref SecurityGroup
+      subnetIds:
+        - ${ssm:/examples/infra/vpc/private-subnet-0/id}
     events:
       - httpApi:
           method: get
           path: /echo
           authorizer:
             name: authorizer
+
+resources:
+  Resources:
+    SecurityGroup:
+      Type: AWS::EC2::SecurityGroup
+      Properties:
+        GroupName: example-lambda
+        GroupDescription: example-lambda
+        VpcId: ${ssm:/examples/infra/vpc/id}
