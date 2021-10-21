@@ -120,6 +120,6 @@ One option is to write parameters to the SSM parameter store and use those in th
 
 ![Cross-account EventBridge](https://github.com/laardee/maas-aws-patterns/blob/main/diagrams/ssm-infra-parameters.drawio.svg)
 
-CDK example (export): [examples/cdk/lib/network-stack.ts](examples/cdk/lib/network-stack.ts)
+CDK example (export VPC details): [examples/cdk/lib/network-stack.ts](examples/cdk/lib/network-stack.ts)
 
-Serverless example (import): [examples/serverless/api-examples/serverless.yml](examples/serverless/api-examples/serverless.yml)
+Serverless example (import VPC details): [examples/serverless/api-examples/serverless.yml](examples/serverless/api-examples/serverless.yml)
