@@ -1,3 +1,7 @@
 export const handler = async () => {
-  // todo
-}
+  const isAuthorized = true;
+  return {
+    isAuthorized,
+    context: {},
+  };
+};
