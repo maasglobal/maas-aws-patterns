@@ -71,6 +71,11 @@ If it’s known that there is no possibility that multiple processors would subs
 
 CDK example: [examples/cdk/lib/s3-single-subscription-stack.ts](examples/cdk/lib/s3-single-subscription-stack.ts)
 
+## S3 object index in a DynamoDB table
+
+The raw event data in S3 buckets, for example, logs or other events, can contain data that needs to be anonymized or deleted based on legislation. The amount of data might be so big that it doesn't make sense to go through the whole bucket when someone requests data removal. In this kind of situation storing an index of objects to a DynamoDB table is one option. The table contains metadata of the object, which user's data is in that file, and things like that, which can be used in the DynamoDB query to identify files that need to be processed.
+
+![Custom authorizer](https://github.com/laardee/maas-aws-patterns/blob/main/diagrams/s3-index-dynamo.drawio.svg)
 
 ## S3 File Upload with API Gateway
 
