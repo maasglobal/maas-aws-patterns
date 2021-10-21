@@ -1,0 +1,38 @@
+service: api-examples
+
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  lambdaHashingVersion: 20201221
+  region: eu-west-1
+  httpApi:
+    authorizers:
+      authorizer:
+        type: request
+        functionName: authorizer
+
+package:
+  individually: true
+
+plugins:
+  - serverless-webpack
+
+custom:
+  webpack:
+    webpackConfig: "webpack.config.js"
+    packager: "yarn"
+    includeModules: true
+
+functions:
+  authorizer:
+    handler: src/authorizer/index.handler
+  echo:
+    handler: src/echo/index.handler
+    events:
+      - httpApi:
+          method: get
+          path: /echo
+          authorizer:
+            name: authorizer
