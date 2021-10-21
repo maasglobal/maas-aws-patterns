@@ -11,6 +11,7 @@ provider:
     authorizers:
       authorizer:
         type: request
+        enableSimpleResponses: true
         functionName: authorizer
 
 package:
