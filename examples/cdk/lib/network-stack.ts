@@ -2,13 +2,14 @@ import { aws_ec2, aws_ssm, Stack, StackProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 
 export class NetworkStack extends Stack {
+  public vpc: aws_ec2.Vpc;
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
     // Create three tier VPC
-    const vpc = new aws_ec2.Vpc(this, 'ContentVPC', {
-      cidr: '10.0.0.0/16',
-      maxAzs: 1, // use 2 for HA, 1 is for saving money and time in this example
+    this.vpc = new aws_ec2.Vpc(this, 'ContentVPC', {
+      cidr: '10.1.0.0/16',
+      maxAzs: 2,
       subnetConfiguration: [
         {
           cidrMask: 24,
@@ -30,12 +31,12 @@ export class NetworkStack extends Stack {
 
     // Export vpc id
     new aws_ssm.StringParameter(this, 'VpcIdParameter', {
-      stringValue: vpc.vpcId,
+      stringValue: this.vpc.vpcId,
       parameterName: '/examples/infra/vpc/id',
     });
 
     // Export private subnets
-    vpc.privateSubnets.forEach((privateSubnet, index) => {
+    this.vpc.privateSubnets.forEach((privateSubnet, index) => {
       new aws_ssm.StringParameter(this, `SubnetIdParameter${index}`, {
         stringValue: privateSubnet.subnetId,
         parameterName: `/examples/infra/vpc/private-subnet-${index}/id`,
