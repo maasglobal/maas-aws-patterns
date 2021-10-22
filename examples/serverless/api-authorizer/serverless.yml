@@ -1,4 +1,4 @@
-service: api-examples
+service: api-authorizer
 
 frameworkVersion: "2"
 

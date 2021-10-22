@@ -34,7 +34,7 @@ A custom authorizer Lambda is a function that validates a header from the reques
 
 ![Custom authorizer](https://github.com/laardee/maas-aws-patterns/blob/main/diagrams/api-custom-authorizer.drawio.svg)
 
-Serverless Framework example: [examples/serverless/api-examples/serverless.yml](examples/serverless/api-examples/serverless.yml)
+Serverless Framework example: [examples/serverless/api-authorizer/serverless.yml](examples/serverless/api-authorizer/serverless.yml)
 
 ## API with a database connection using PostgreSQL protocol
 
@@ -122,4 +122,4 @@ One option is to write parameters to the SSM parameter store and use those in th
 
 CDK example (export VPC details): [examples/cdk/lib/network-stack.ts](examples/cdk/lib/network-stack.ts)
 
-Serverless example (import VPC details): [examples/serverless/api-examples/serverless.yml](examples/serverless/api-examples/serverless.yml)
+Serverless example (import VPC details): [examples/serverless/api-authorizer/serverless.yml](examples/serverless/api-authorizer/serverless.yml)
