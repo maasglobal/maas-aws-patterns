@@ -1,0 +1,64 @@
+service: api-database
+
+frameworkVersion: "2"
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  lambdaHashingVersion: 20201221
+  region: eu-west-1
+  iam:
+    role:
+      statements:
+        - Effect: "Allow"
+          Action:
+            - "ssm:GetParameter"
+          Resource:
+            - !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}::parameter/examples/infra/database/cluster/arn"
+            - !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}::parameter/examples/infra/database/endpoint/hostname"
+            - !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}::parameter/examples/infra/database/secret/arn"
+        - Effect: "Allow"
+          Action:
+            - "ssm:GetSecretValue"
+          Resource:
+            - ${ssm:/examples/infra/database/secret/arn}
+package:
+  individually: true
+
+plugins:
+  - serverless-webpack
+
+custom:
+  webpack:
+    webpackConfig: "webpack.config.js"
+    packager: "yarn"
+    includeModules: true
+
+functions:
+  data-api:
+    handler: src/data-api/index.handler
+    events:
+      - httpApi:
+          method: get
+          path: /data-api
+  postgres:
+    handler: src/postgres/index.handler
+    vpc:
+      securityGroupIds:
+        - !Ref SecurityGroup
+      subnetIds:
+        - ${ssm:/examples/infra/vpc/private-subnet-0/id}
+        - ${ssm:/examples/infra/vpc/private-subnet-1/id}
+    events:
+      - httpApi:
+          method: get
+          path: /postgres
+
+resources:
+  Resources:
+    SecurityGroup:
+      Type: AWS::EC2::SecurityGroup
+      Properties:
+        GroupName: example-lambda
+        GroupDescription: example-lambda
+        VpcId: ${ssm:/examples/infra/vpc/id}

@@ -118,6 +118,8 @@ Sharing parameters between service deployments can be done multiple ways, for ex
 
 One option is to write parameters to the SSM parameter store and use those in the deployment that requires them. Of course, when the parameters change in the exporting stack, there will be downtime, but it will be less than with the removal and redeploy approach.
 
+This also allows stacks to be portable between accounts, and don't rely on stack names to be the same.
+
 ![Cross-account EventBridge](https://github.com/laardee/maas-aws-patterns/blob/main/diagrams/ssm-infra-parameters.drawio.svg)
 
 CDK example (export VPC details): [examples/cdk/lib/network-stack.ts](examples/cdk/lib/network-stack.ts)
