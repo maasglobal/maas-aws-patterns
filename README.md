@@ -124,8 +124,6 @@ This also allows stacks to be portable between accounts, and don't rely on stack
 
 CDK example (export VPC details): [examples/cdk/lib/network-stack.ts](examples/cdk/lib/network-stack.ts#L33-L44)
 
-https://github.com/laardee/maas-aws-patterns/blob/b76d6a1dbf2bb1b4bb61f1e20c75555c80ec24fe/examples/cdk/lib/database-stack.ts#L66-L84
-
 Serverless example (import VPC details): [examples/serverless/api-database/serverless.yml](examples/serverless/api-database/serverless.yml#L64-L65)
 
 CDK example (export database details): [examples/cdk/lib/database-stack.ts](examples/cdk/lib/database-stack.ts#L66-L84)
