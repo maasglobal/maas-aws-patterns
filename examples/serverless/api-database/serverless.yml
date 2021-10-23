@@ -19,7 +19,7 @@ provider:
             - !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/examples/infra/database/secret/arn"
         - Effect: "Allow"
           Action:
-            - ssm:GetSecretValue
+            - secretsmanager:GetSecretValue
           Resource:
             - ${ssm:/examples/infra/database/secret/arn}
         - Effect: Allow
