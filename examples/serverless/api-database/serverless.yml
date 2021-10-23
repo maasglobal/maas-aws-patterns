@@ -7,6 +7,8 @@ provider:
   runtime: nodejs14.x
   lambdaHashingVersion: 20201221
   region: eu-west-1
+  environment:
+    AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1"
   iam:
     role:
       statements:
@@ -41,17 +43,20 @@ custom:
   webpack:
     webpackConfig: "webpack.config.js"
     packager: "yarn"
-    includeModules: true
-
+    includeModules:
+      forceInclude:
+        - pg
 functions:
   data-api:
     handler: src/data-api/index.handler
+    timeout: 28
     events:
       - httpApi:
           method: get
           path: /data-api
   postgres:
     handler: src/postgres/index.handler
+    timeout: 28
     vpc:
       securityGroupIds:
         - !Ref SecurityGroup

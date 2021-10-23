@@ -1,4 +1,5 @@
 import Knex from "knex";
+import pg from 'pg';
 import { SSMClient, GetParameterCommand } from "@aws-sdk/client-ssm";
 import {
   SecretsManagerClient,
