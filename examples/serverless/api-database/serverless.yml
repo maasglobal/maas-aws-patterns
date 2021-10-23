@@ -14,9 +14,9 @@ provider:
           Action:
             - ssm:GetParameter
           Resource:
-            - !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}::parameter/examples/infra/database/cluster/arn"
-            - !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}::parameter/examples/infra/database/endpoint/hostname"
-            - !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}::parameter/examples/infra/database/secret/arn"
+            - !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/examples/infra/database/cluster/arn"
+            - !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/examples/infra/database/endpoint/hostname"
+            - !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/examples/infra/database/secret/arn"
         - Effect: "Allow"
           Action:
             - ssm:GetSecretValue
