@@ -10,18 +10,27 @@ provider:
   iam:
     role:
       statements:
-        - Effect: "Allow"
+        - Effect: Allow
           Action:
-            - "ssm:GetParameter"
+            - ssm:GetParameter
           Resource:
             - !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}::parameter/examples/infra/database/cluster/arn"
             - !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}::parameter/examples/infra/database/endpoint/hostname"
             - !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}::parameter/examples/infra/database/secret/arn"
         - Effect: "Allow"
           Action:
-            - "ssm:GetSecretValue"
+            - ssm:GetSecretValue
           Resource:
             - ${ssm:/examples/infra/database/secret/arn}
+        - Effect: Allow
+          Action:
+            - rds-data:BatchExecuteStatement
+            - rds-data:BeginTransaction
+            - rds-data:CommitTransaction
+            - rds-data:ExecuteStatement
+            - rds-data:RollbackTransaction
+          Resource:
+            - ${ssm:/examples/infra/database/cluster/arn}
 package:
   individually: true
 
