@@ -124,4 +124,9 @@ This also allows stacks to be portable between accounts, and don't rely on stack
 
 CDK example (export VPC details): [examples/cdk/lib/network-stack.ts](examples/cdk/lib/network-stack.ts)
 
-Serverless example (import VPC details): [examples/serverless/api-authorizer/serverless.yml](examples/serverless/api-authorizer/serverless.yml)
+Serverless example (import VPC details): [examples/serverless/api-database/serverless.yml](examples/serverless/api-database/serverless.yml)
+
+CDK example (export database details): [examples/cdk/lib/database-stack.ts](examples/cdk/lib/database-stack.ts)
+
+Serverless example (import database details): [examples/serverless/api-database/serverless.yml](examples/serverless/api-database/serverless.yml)
+Serverless example (import database details): [examples/serverless/api-database/src/data-api/database.ts](examples/serverless/api-database/src/data-api/database.ts)
