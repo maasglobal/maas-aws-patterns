@@ -42,11 +42,15 @@ When connecting to a database with PostgreSQL protocol, the Lambda function need
 
 ![Custom authorizer](https://github.com/laardee/maas-aws-patterns/blob/main/diagrams/api-with-database-vpc.drawio.svg)
 
+Serverless example: [examples/serverless/api-database/serverless.yml](examples/serverless/api-database/serverless.yml#L57-L69)
+
 ## API with an Aurora connection using Data API
 
 The Amazon Aurora database cluster allows connection using the Data API. It doesn’t require a persistent connection, but instead, it uses a secured HTTP endpoint. In some cases, the connection might have more latency than e.g. PostgresSQL connection, but the cold start time of the Lambda function is shorter when it doesn’t have to be inside the VPC.
 
 ![Custom authorizer](https://github.com/laardee/maas-aws-patterns/blob/main/diagrams/api-with-database-data-api.drawio.svg)
+
+Serverless example: [examples/serverless/api-database/serverless.yml](examples/serverless/api-database/serverless.yml#L50-L56)
 
 ## API with asynchronous processing
 
