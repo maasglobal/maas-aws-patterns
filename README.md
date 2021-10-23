@@ -122,11 +122,11 @@ This also allows stacks to be portable between accounts, and don't rely on stack
 
 ![Cross-account EventBridge](https://github.com/laardee/maas-aws-patterns/blob/main/diagrams/ssm-infra-parameters.drawio.svg)
 
-CDK example (export VPC details): [examples/cdk/lib/network-stack.ts](examples/cdk/lib/network-stack.ts)
+CDK example (export VPC details): [examples/cdk/lib/network-stack.ts](examples/cdk/lib/network-stack.ts#L33-L44)
 
-Serverless example (import VPC details): [examples/serverless/api-database/serverless.yml](examples/serverless/api-database/serverless.yml)
+Serverless example (import VPC details): [examples/serverless/api-database/serverless.yml](examples/serverless/api-database/serverless.yml#L64-L65)
 
-CDK example (export database details): [examples/cdk/lib/database-stack.ts](examples/cdk/lib/database-stack.ts)
+CDK example (export database details): [examples/cdk/lib/database-stack.ts](examples/cdk/lib/database-stack.ts#L66-L84)
 
-Serverless example (import database details): [examples/serverless/api-database/serverless.yml](examples/serverless/api-database/serverless.yml)
-Serverless example (import database details): [examples/serverless/api-database/src/data-api/database.ts](examples/serverless/api-database/src/data-api/database.ts)
+Serverless example (import database details): [examples/serverless/api-database/serverless.yml](examples/serverless/api-database/serverless.yml#L12-L35)
+Serverless example (import database details): [examples/serverless/api-database/src/data-api/database.ts](examples/serverless/api-database/src/data-api/database.ts#L31-L36)
