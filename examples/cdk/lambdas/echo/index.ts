@@ -1,6 +1,6 @@
 import { APIGatewayProxyEventV2, SNSEvent, SQSEvent } from 'aws-lambda';
 
-export const handler = (
+export const handler = async (
   event: SQSEvent | SNSEvent | APIGatewayProxyEventV2
 ) => {
   console.log(JSON.stringify(event, null, 2));
