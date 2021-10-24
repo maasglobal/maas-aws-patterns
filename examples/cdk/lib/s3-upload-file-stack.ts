@@ -1,5 +1,6 @@
 import {
   aws_apigateway,
+  aws_iam,
   aws_lambda,
   aws_lambda_nodejs,
   aws_s3,
@@ -14,7 +15,21 @@ export class S3UploadFileStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    const bucket = new aws_s3.Bucket(this, 'Bucket', {});
+    const bucket = new aws_s3.CfnBucket(this, 'Bucket', {
+      versioningConfiguration: {
+        status: 'Enabled',
+      },
+      objectLockEnabled: true,
+      objectLockConfiguration: {
+        objectLockEnabled: 'Enabled',
+        rule: {
+          defaultRetention: {
+            days: 1,
+            mode: 'GOVERNANCE',
+          },
+        },
+      },
+    });
 
     const signedUrlLambda = new aws_lambda_nodejs.NodejsFunction(
       this,
@@ -25,7 +40,7 @@ export class S3UploadFileStack extends Stack {
         entry: path.join(__dirname, '..', 'lambdas', 'signed-url', 'index.ts'),
         timeout: Duration.seconds(10),
         environment: {
-          BUCKET: bucket.bucketName,
+          BUCKET: bucket.ref,
         },
         bundling: {
           sourceMap: false,
@@ -36,7 +51,13 @@ export class S3UploadFileStack extends Stack {
       }
     );
 
-    bucket.grantWrite(signedUrlLambda);
+    signedUrlLambda.addToRolePolicy(
+      new aws_iam.PolicyStatement({
+        effect: aws_iam.Effect.ALLOW,
+        actions: ['s3:PutObject'],
+        resources: [`${bucket.attrArn}/upload/*`],
+      })
+    );
 
     // Proxy API Gateway
     const api = new aws_apigateway.LambdaRestApi(this, 'ProxyApiGateway', {
