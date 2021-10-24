@@ -40,7 +40,7 @@ Serverless Framework example: [examples/serverless/api-authorizer/serverless.yml
 
 When connecting to a database with PostgreSQL protocol, the Lambda function needs to be in the same VPC. The VPC should be divided into an application tier and a data tier. The application tier subnets should be at the least in two availability zones when running the production payload.
 
-![Custom authorizer](https://github.com/laardee/maas-aws-patterns/blob/main/diagrams/api-with-database-vpc.drawio.svg)
+![API with VPC](https://github.com/laardee/maas-aws-patterns/blob/main/diagrams/api-with-database-vpc.drawio.svg)
 
 Serverless example: [examples/serverless/api-database/serverless.yml](examples/serverless/api-database/serverless.yml#L57-L69)
 
@@ -48,7 +48,7 @@ Serverless example: [examples/serverless/api-database/serverless.yml](examples/s
 
 The Amazon Aurora database cluster allows connection using the Data API. It doesn’t require a persistent connection, but instead, it uses a secured HTTP endpoint. In some cases, the connection might have more latency than e.g. PostgresSQL connection, but the cold start time of the Lambda function is shorter when it doesn’t have to be inside the VPC.
 
-![Custom authorizer](https://github.com/laardee/maas-aws-patterns/blob/main/diagrams/api-with-database-data-api.drawio.svg)
+![API with Data API](https://github.com/laardee/maas-aws-patterns/blob/main/diagrams/api-with-database-data-api.drawio.svg)
 
 Serverless example: [examples/serverless/api-database/serverless.yml](examples/serverless/api-database/serverless.yml#L50-L56)
 
@@ -56,13 +56,15 @@ Serverless example: [examples/serverless/api-database/serverless.yml](examples/s
 
 If API doesn't need to send the response synchronously, the compute layer might not be needed. Amazon API Gateway supports service integrations, where e.g. messages to the SQS queue can be sent straight from the request.
 
-![Custom authorizer](https://github.com/laardee/maas-aws-patterns/blob/main/diagrams/api-service-integration.drawio.svg)
+![API service integration](https://github.com/laardee/maas-aws-patterns/blob/main/diagrams/api-service-integration.drawio.svg)
 
 ## Webhook Proxy
 
-In some cases, webhooks needs to be distributed asynchronously to multiple recipients. To avoid defining those recipients beforehand, the payload can be pushed forward e.g. using DynamoDB streams.
+In some cases, webhooks needs to be distributed asynchronously to multiple recipients. For example some SaaS services has hard limit how many webhook URLs can be defined to their system, and when developing with multiple development stages, that limit is reached quickly.  To avoid defining those recipients beforehand, the payload can be pushed forward e.g. using DynamoDB streams.
 
-![Custom authorizer](https://github.com/laardee/maas-aws-patterns/blob/main/diagrams/api-webhook-proxy.drawio.svg)
+In this approach, the API gateway receives the webhook and responses with 200 status code. The webhook payload is stored to a DynamoDB table that has streams enabled. The development stage Lambda functions listens that stream and processes the payload if it's meant to that stage.
+
+![Webhook proxy](https://github.com/laardee/maas-aws-patterns/blob/main/diagrams/api-webhook-proxy.drawio.svg)
 
 # S3
 
@@ -70,7 +72,7 @@ In some cases, webhooks needs to be distributed asynchronously to multiple recip
 
 To subscribe to multiple sources when the object is created, modified, or deleted, the use of SNS topic is the easiest way.
 
-![Custom authorizer](https://github.com/laardee/maas-aws-patterns/blob/main/diagrams/s3-multiple-subscriptions.drawio.svg)
+![S3 multiple subscriptions](https://github.com/laardee/maas-aws-patterns/blob/main/diagrams/s3-multiple-subscriptions.drawio.svg)
 
 CDK example: [examples/cdk/lib/s3-multiple-subscriptions-stack.ts](examples/cdk/lib/s3-multiple-subscriptions-stack.ts)
 
@@ -78,7 +80,7 @@ CDK example: [examples/cdk/lib/s3-multiple-subscriptions-stack.ts](examples/cdk/
 
 If it’s known that there is no possibility that multiple processors would subscribe to S3 events, an SQS or a Lambda trigger can be used in the subscription.
 
-![Custom authorizer](https://github.com/laardee/maas-aws-patterns/blob/main/diagrams/s3-single-subscription.drawio.svg)
+![S3 single subscription](https://github.com/laardee/maas-aws-patterns/blob/main/diagrams/s3-single-subscription.drawio.svg)
 
 CDK example: [examples/cdk/lib/s3-single-subscription-stack.ts](examples/cdk/lib/s3-single-subscription-stack.ts)
 
@@ -86,7 +88,7 @@ CDK example: [examples/cdk/lib/s3-single-subscription-stack.ts](examples/cdk/lib
 
 The raw event data in S3 buckets, for example, logs or other events, can contain data that needs to be anonymized or deleted based on legislation. The amount of data might be so big that it doesn't make sense to go through the whole bucket when someone requests data removal. In this kind of situation storing an index of objects to a DynamoDB table is one option. The table contains metadata of the object, which user's data is in that file, and things like that, which can be used in the DynamoDB query to identify files that need to be processed.
 
-![Custom authorizer](https://github.com/laardee/maas-aws-patterns/blob/main/diagrams/s3-index-dynamo.drawio.svg)
+![S3 index](https://github.com/laardee/maas-aws-patterns/blob/main/diagrams/s3-index-dynamo.drawio.svg)
 
 ## S3 File Upload with API Gateway
 
@@ -104,7 +106,7 @@ Client example: [examples/clients/upload-file-s3.ts](examples/clients/upload-fil
 
 Asynchronously triggered Lambdas retries the execution automatically on failure a few times. To catch failed execution a dead letter queue is an option that can be used to notify failures, retry executions later, and keep the history of failed executions.
 
-![Custom authorizer](https://github.com/laardee/maas-aws-patterns/blob/main/diagrams/queue-lambda-dlq.drawio.svg)
+![Dead-letter-queue](https://github.com/laardee/maas-aws-patterns/blob/main/diagrams/queue-lambda-dlq.drawio.svg)
 
 ## High-volume event pipeline
 
