@@ -41,7 +41,15 @@ export class S3UploadFileStack extends Stack {
     // Proxy API Gateway
     const api = new aws_apigateway.LambdaRestApi(this, 'ProxyApiGateway', {
       handler: signedUrlLambda,
+      restApiName: 'example-s3-upload',
+      apiKeySourceType: aws_apigateway.ApiKeySourceType.HEADER,
+      defaultMethodOptions: {
+        apiKeyRequired: true,
+      },
     });
-    api.addApiKey('example-signed-url-api-key');
+    const apiKey = api.addApiKey('example-signed-url-api-key');
+    const usagePlan = api.addUsagePlan('example-s3-upload');
+    usagePlan.addApiKey(apiKey);
+    usagePlan.addApiStage({ stage: api.deploymentStage });
   }
 }

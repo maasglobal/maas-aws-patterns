@@ -94,6 +94,10 @@ When uploading files that are larger than API Gateway can handle, the following 
 
 ![S3 Upload](https://github.com/laardee/maas-aws-patterns/blob/main/diagrams/s3-upload.drawio.svg)
 
+CDK example: [examples/cdk/lib/s3-upload-file-stack.ts](examples/cdk/lib/s3-upload-file-stack.ts)
+
+Client example: [examples/clients/upload-file-s3.ts](examples/clients/upload-file-s3.ts)
+
 # Queues and Pipelines
 
 ## Dead Letter Queue (DLQ)
