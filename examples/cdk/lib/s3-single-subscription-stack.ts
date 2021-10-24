@@ -14,7 +14,7 @@ export class S3SingleSubscriptionStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    // an S3 source bucket
+    // an S3 source bucket, object lock can be used to prevent double uploads
     const bucket = new aws_s3.Bucket(this, 'Bucket', {});
 
     // a Lambda function as a subscription
