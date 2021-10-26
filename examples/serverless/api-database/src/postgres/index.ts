@@ -1,5 +1,5 @@
 import { APIGatewayProxyEventV2 } from "aws-lambda";
-import Knex from "knex";
+import { Knex } from "knex";
 import { knex } from "./database";
 
 let client: Knex;
