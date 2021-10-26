@@ -52,6 +52,44 @@ The Amazon Aurora database cluster allows connection using the Data API. It does
 
 Serverless example: [examples/serverless/api-database/serverless.yml](examples/serverless/api-database/serverless.yml#L50-L56)
 
+### Performance comparison
+
+The performance of the data api and the postgresql protocol is quite even. The results of a quick peformance test using artillery.io confirms it.
+
+```yaml
+POSTGRES:
+  Scenarios launched: 1000
+  Scenarios completed: 1000
+  Requests completed: 1000
+  Mean response/sec: 95.24
+  Response time (msec):
+    min: 65
+    max: 2337 # VPC Lambda cold start
+    median: 78
+    p95: 133
+    p99: 1509.5
+  Scenario counts:
+    0: 1000 (100%)
+  Codes:
+    200: 1000
+
+DATA-API:
+  Scenarios launched: 1000
+  Scenarios completed: 1000
+  Requests completed: 1000
+  Mean response/sec: 95.51
+  Response time (msec):
+    min: 61
+    max: 335
+    median: 75
+    p95: 99
+    p99: 162
+  Scenario counts:
+    0: 1000 (100%)
+  Codes:
+    200: 1000
+```
+
 ## API with asynchronous processing
 
 If API doesn't need to send the response synchronously, the compute layer might not be needed. Amazon API Gateway supports service integrations, where e.g. messages to the SQS queue can be sent straight from the request.
