@@ -54,7 +54,7 @@ Serverless example: [examples/serverless/api-database/serverless.yml](examples/s
 
 ### Performance comparison
 
-The performance of the data api and the postgresql protocol is quite even. The results of a quick peformance test using artillery.io confirms it.
+The performance of the data api and the postgresql protocol is quite even. The results of a quick performance test using artillery.io confirms it.
 
 ```yaml
 POSTGRES:
