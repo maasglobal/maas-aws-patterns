@@ -1,0 +1,57 @@
+service: api-service-integration
+
+frameworkVersion: "2"
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  lambdaHashingVersion: 20201221
+  region: eu-west-1
+
+package:
+  individually: true
+
+plugins:
+  - serverless-webpack
+  - serverless-apigateway-service-proxy
+
+custom:
+  webpack:
+    webpackConfig: "webpack.config.js"
+    packager: "yarn"
+    includeModules: true
+  apiGatewayServiceProxies:
+    - sqs:
+        path: /sqs
+        method: post
+        queueName: !GetAtt SQSQueue.QueueName
+        cors: true
+        response:
+          template:
+            success: |
+              {
+                "success": true
+              }
+            serverError: |
+              {
+                "success": false,
+                "errorMessage": "Server Error"
+              }
+            clientError: |
+              {
+                "success": false,
+                "errorMessage": "Client Error"
+              }
+functions:
+  echo:
+    handler: src/echo/index.handler
+    events:
+      - sqs:
+          arn: !GetAtt SQSQueue.Arn
+          batchSize: 10
+          maximumBatchingWindow: 10
+
+resources:
+  Resources:
+    SQSQueue:
+      Type: 'AWS::SQS::Queue'
