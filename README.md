@@ -94,6 +94,8 @@ If API doesn't need to send the response synchronously, the compute layer might 
 
 ![API service integration](https://github.com/laardee/maas-aws-patterns/blob/main/diagrams/api-service-integration.drawio.svg)
 
+Serverless example: [examples/serverless/api-service-integration/serverless.yml](examples/serverless/api-service-integration/serverless.yml)
+
 ## Webhook Proxy
 
 In some cases, webhooks needs to be distributed asynchronously to multiple recipients. For example some SaaS services has hard limit how many webhook URLs can be defined to their system, and when developing with multiple development stages, that limit is reached quickly.  To avoid defining those recipients beforehand, the payload can be pushed forward e.g. using DynamoDB streams.
