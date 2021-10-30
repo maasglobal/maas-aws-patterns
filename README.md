@@ -18,9 +18,7 @@ Table of Contents
   * [Dead Letter Queue (DLQ)](#dead-letter-queue-dlq)
   * [High-volume event pipeline)](#high-volume-event-pipeline)
 - [Deployment](#deployment)
-  * [Usage of Systems Manager Parameter Store with deployment](#usage-of-systems-manager-parameter-store-with-deployment)
-
-
+  * [Usage of Systems Manager Parameter Store in Deployment](#usage-of-systems-manager-parameter-store-in-deployment)
 
 # Introduction
 
@@ -160,7 +158,7 @@ The fan-in approach can also be used with a cross-account Amazon EventBridge pat
 
 # Deployment
 
-## Usage of Systems Manager Parameter Store with deployment
+## Usage of Systems Manager Parameter Store in Deployment
 
 Sharing parameters between service deployments can be done multiple ways, for example, exporting output from the CloudFormation template and importing that to the next stack. In this approach, changes that require replacement in the exporting stack will cause issues - exported params cannot be changed if other stack imports those. Removing the importing stack will cause long downtime.
 
