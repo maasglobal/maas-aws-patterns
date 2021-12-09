@@ -11,24 +11,24 @@
     "cdk": "cdk"
   },
   "devDependencies": {
-    "@types/jest": "^27.0.2",
-    "@types/node": "16.11.6",
-    "@types/uuid": "^8.3.1",
-    "aws-cdk": "2.0.0-rc.24",
-    "jest": "^27.3.1",
-    "prettier": "^2.4.1",
-    "ts-jest": "^27.0.7",
+    "@types/jest": "^27.0.3",
+    "@types/node": "16.11.12",
+    "@types/uuid": "^8.3.3",
+    "aws-cdk": "2.1.0",
+    "jest": "^27.4.3",
+    "prettier": "^2.5.1",
+    "ts-jest": "^27.1.1",
     "ts-node": "^10.4.0",
-    "typescript": "~4.4.4"
+    "typescript": "~4.5.2"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.38.0",
-    "@aws-sdk/s3-request-presigner": "^3.38.0",
-    "@types/aws-lambda": "^8.10.84",
-    "aws-cdk-lib": "2.0.0-rc.26",
-    "aws-lambda": "^1.0.6",
-    "constructs": "^10.0.0",
-    "source-map-support": "^0.5.20",
+    "@aws-sdk/client-s3": "^3.44.0",
+    "@aws-sdk/s3-request-presigner": "^3.44.0",
+    "@types/aws-lambda": "^8.10.86",
+    "aws-cdk-lib": "2.1.0",
+    "aws-lambda": "^1.0.7",
+    "constructs": "^10.0.10",
+    "source-map-support": "^0.5.21",
     "uuid": "^8.3.2"
   }
 }
