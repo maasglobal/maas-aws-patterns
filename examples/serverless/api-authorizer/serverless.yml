@@ -1,6 +1,6 @@
 service: api-authorizer
 
-frameworkVersion: "2"
+frameworkVersion: '2'
 
 provider:
   name: aws
@@ -22,8 +22,8 @@ plugins:
 
 custom:
   webpack:
-    webpackConfig: "webpack.config.js"
-    packager: "yarn"
+    webpackConfig: 'webpack.config.js'
+    packager: 'yarn'
     includeModules: true
 
 functions:
