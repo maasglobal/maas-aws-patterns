@@ -4,8 +4,7 @@ import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import { v4 as uuidv4 } from 'uuid';
 
 const client = new S3Client({
-  region:
-    process.env.AWS_REGION || process.env.AWS_DEFAULT_REGION || 'eu-west-1',
+  region: process.env.AWS_REGION || process.env.AWS_DEFAULT_REGION || 'eu-west-1',
 });
 export const handler = async (event: APIGatewayProxyEvent) => {
   console.log(JSON.stringify(event, null, 2));
