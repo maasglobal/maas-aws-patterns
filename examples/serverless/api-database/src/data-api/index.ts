@@ -1,6 +1,6 @@
-import { APIGatewayProxyEventV2 } from "aws-lambda";
-import { Knex } from "knex";
-import { knex } from "./database";
+import { APIGatewayProxyEventV2 } from 'aws-lambda';
+import { Knex } from 'knex';
+import { knex } from './database';
 
 let client: Knex;
 
@@ -13,13 +13,13 @@ async function initClient() {
 export const handler = async (event: APIGatewayProxyEventV2) => {
   console.log(JSON.stringify(event, null, 2));
   await initClient();
-  const postgresUsers = await client.select("usename").from("pg_catalog.pg_user");
+  const postgresUsers = await client.select('usename').from('pg_catalog.pg_user');
   console.log(postgresUsers);
   return {
     statusCode: 200,
     body: JSON.stringify({ userCount: postgresUsers.length }),
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   };
 };

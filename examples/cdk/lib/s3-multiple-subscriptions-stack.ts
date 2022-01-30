@@ -27,32 +27,23 @@ export class S3MultipleSubscriptionsStack extends Stack {
       displayName: 's3-multiple-subscriptions',
     });
 
-    bucket.addEventNotification(
-      aws_s3.EventType.OBJECT_CREATED,
-      new aws_s3_notifications.SnsDestination(topic)
-    );
+    bucket.addEventNotification(aws_s3.EventType.OBJECT_CREATED, new aws_s3_notifications.SnsDestination(topic));
 
     // a Lambda function as a subscription
-    const echoLambda = new aws_lambda_nodejs.NodejsFunction(
-      this,
-      'EchoLambda',
-      {
-        runtime: aws_lambda.Runtime.NODEJS_14_X,
-        handler: 'handler',
-        entry: path.join(__dirname, '..', 'lambdas', 'echo', 'index.ts'),
-        timeout: Duration.seconds(10),
-        bundling: {
-          sourceMap: false,
-          minify: false,
-          target: 'es2020',
-          externalModules: ['aws-sdk'],
-        },
-      }
-    );
+    const echoLambda = new aws_lambda_nodejs.NodejsFunction(this, 'EchoLambda', {
+      runtime: aws_lambda.Runtime.NODEJS_14_X,
+      handler: 'handler',
+      entry: path.join(__dirname, '..', 'lambdas', 'echo', 'index.ts'),
+      timeout: Duration.seconds(10),
+      bundling: {
+        sourceMap: false,
+        minify: false,
+        target: 'es2020',
+        externalModules: ['aws-sdk'],
+      },
+    });
 
-    echoLambda.addEventSource(
-      new aws_lambda_event_sources.SnsEventSource(topic)
-    );
+    echoLambda.addEventSource(new aws_lambda_event_sources.SnsEventSource(topic));
 
     // an SQS queue as a subscription
     const queue = new aws_sqs.Queue(this, 'Queue', {

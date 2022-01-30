@@ -1,6 +1,6 @@
 service: api-database
 
-frameworkVersion: "2"
+frameworkVersion: '2'
 
 provider:
   name: aws
@@ -8,7 +8,7 @@ provider:
   lambdaHashingVersion: 20201221
   region: eu-west-1
   environment:
-    AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1"
+    AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1'
   iam:
     role:
       statements:
@@ -16,10 +16,10 @@ provider:
           Action:
             - ssm:GetParameter
           Resource:
-            - !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/examples/infra/database/cluster/arn"
-            - !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/examples/infra/database/endpoint/hostname"
-            - !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/examples/infra/database/secret/arn"
-        - Effect: "Allow"
+            - !Sub 'arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/examples/infra/database/cluster/arn'
+            - !Sub 'arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/examples/infra/database/endpoint/hostname'
+            - !Sub 'arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/examples/infra/database/secret/arn'
+        - Effect: 'Allow'
           Action:
             - secretsmanager:GetSecretValue
           Resource:
@@ -41,8 +41,8 @@ plugins:
 
 custom:
   webpack:
-    webpackConfig: "webpack.config.js"
-    packager: "yarn"
+    webpackConfig: 'webpack.config.js'
+    packager: 'yarn'
     includeModules:
       forceInclude:
         - pg

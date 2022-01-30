@@ -1,12 +1,4 @@
-import {
-  aws_ec2,
-  aws_rds,
-  aws_secretsmanager,
-  aws_ssm,
-  Duration,
-  Stack,
-  StackProps,
-} from 'aws-cdk-lib';
+import { aws_ec2, aws_rds, aws_secretsmanager, aws_ssm, Duration, Stack, StackProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 
 interface DatabaseProps extends StackProps {
@@ -27,11 +19,7 @@ export class DatabaseStack extends Stack {
       },
     });
 
-    const clusterSecurityGroup = new aws_ec2.SecurityGroup(
-      this,
-      'ClusterSecurityGroup',
-      { vpc }
-    );
+    const clusterSecurityGroup = new aws_ec2.SecurityGroup(this, 'ClusterSecurityGroup', { vpc });
 
     vpc.privateSubnets.forEach((privateSubnet) => {
       clusterSecurityGroup.addIngressRule(

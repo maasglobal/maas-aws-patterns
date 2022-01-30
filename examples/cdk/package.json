@@ -8,13 +8,15 @@
     "build": "tsc",
     "watch": "tsc -w",
     "test": "jest",
-    "cdk": "cdk"
+    "cdk": "cdk",
+    "prettier": "prettier --write ."
   },
   "devDependencies": {
     "@types/jest": "^27.0.3",
     "@types/node": "16.11.12",
     "@types/uuid": "^8.3.3",
     "aws-cdk": "2.1.0",
+    "eslint-config-maasglobal": "^4.0.1",
     "jest": "^27.4.3",
     "prettier": "^2.5.1",
     "ts-jest": "^27.1.1",
